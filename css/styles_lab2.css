@@ -1,0 +1,148 @@
+.container {
+    width: 97%;
+    margin: 0 auto;
+    display: grid;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    border-radius: 35px;
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    background-color: white;
+}
+
+.grid-item:hover {
+    border: 2px solid tomato;
+}
+
+.grid-item:hover .btn {
+    background-color: tomato;
+}
+
+.produtc-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto; 
+    margin-bottom: 15px;
+}
+
+.produtc-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 35px;
+    min-width: 300px; 
+    min-height: 300px; 
+}
+
+.grid-item:hover .into {
+    font-size: 1.2em;
+}
+
+.grid-item:hover .name_produtc {
+    font-size: 1.2em;
+}
+
+.grid-item:hover .weight {
+    color: gray;
+}
+
+.btn {
+    background-color: #f1eee9;
+    margin-top: 15px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; 
+    text-align: center; 
+    align-items: center;
+}
+
+menu {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.into, .name_produtc {
+    margin: 0;
+}
+
+footer {
+    margin-top: 25px;
+}
+
+@media (max-width: 1000px) {
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .produtc-image img {
+        max-width: 100%;
+        height: auto;
+        min-width: 150px; 
+        min-height: 150px; 
+    }
+    .btn {
+        font-size: 14px; 
+        padding: 8px 20px; 
+    }
+    .into, .name_produtc, .weight {
+        font-size: 14px; 
+    }
+
+    .grid-item:hover .into {
+        font-size: 0.9em;
+    }
+    .grid-item:hover .name_produtc {
+        font-size: 0.9em;
+}
+}
+
+@media (max-width: 600px) {
+    section > h2 {
+        text-align: center;
+    }
+    .grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .produtc-image img {
+        max-width: 100%;
+        height: auto;
+        min-width: 100px; 
+        min-height: 100px; 
+    }
+    .btn {
+        font-size: 9px; 
+        padding: 5px 5px; 
+    }
+    .into, .name_produtc, .weight {
+        font-size: 12px; 
+    }
+
+    .grid-item:hover .into {
+        font-size: 0.9em;
+    }
+    .grid-item:hover .name_produtc {
+        font-size: 0.9em;
+}
+}
+
+/* не обрезает элементы */
+.grid-item {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+} 

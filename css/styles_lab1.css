@@ -1,0 +1,111 @@
+div, header, footer, main, nav, ul {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}  
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+nav a {
+    margin-right: 40px;
+}
+
+body {
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px; 
+    color: black;
+}
+
+img {
+    width: 70%;
+    height: auto;
+    margin-top: 25px;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 2px solid black;
+    padding: 9px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    font-family: "Jost", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24px;
+    color: black;
+}
+
+a:hover {
+    color: rgb(226, 81, 81);
+} 
+
+h1 a {
+    font-size: 40px;
+}
+
+footer a {
+    color: white;
+}
+
+body, header, main, h1, nav, .about, .advantages, .top_dishes {
+    padding-left: 20px; 
+}
+
+footer {
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 20px;
+    margin-left: -20px;
+}
+
+@media (max-width: 800px) {
+    img {
+        width: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        font-size: calc(1em + 4px);
+    }
+
+    img {
+        width: 100%;
+    }
+
+    table {
+        font-size: calc(1em - 2px);
+    }
+}
+
+@media (max-width: 400px) {
+    table {
+        font-size: calc(1em - 4px);
+    }
+}
