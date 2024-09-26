@@ -140,7 +140,7 @@ footer {
 }
 }
 
-/* не обрезает элементы */
+
 .grid-item {
     overflow: hidden;
     white-space: nowrap;
