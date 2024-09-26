@@ -74,6 +74,9 @@ footer {
     padding: 20px;
     margin-left: -20px;
 }
+.active {
+    color: tomato;
+}
 
 @media (max-width: 800px) {
     img {

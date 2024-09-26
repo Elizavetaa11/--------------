@@ -7,7 +7,7 @@
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 10px; /*отступы*/
 }
 
 .grid-item {
@@ -15,7 +15,7 @@
     flex-direction: column;
     padding: 30px 40px;
     border-radius: 35px;
-    cursor: pointer;
+     cursor: pointer; /*изменчет вид курсора */
     filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
     background-color: white;
 }
@@ -67,12 +67,17 @@
     width: 100%; 
     text-align: center; 
     align-items: center;
+    border: none;
 }
 
 menu {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+}
+
+.active {
+    color: tomato;
 }
 
 .into, .name_produtc {
@@ -85,15 +90,9 @@ footer {
 
 @media (max-width: 1000px) {
     .grid-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
-    
-    .produtc-image img {
-        max-width: 100%;
-        height: auto;
-        min-width: 150px; 
-        min-height: 150px; 
-    }
+
     .btn {
         font-size: 14px; 
         padding: 8px 20px; 
@@ -115,15 +114,9 @@ footer {
         text-align: center;
     }
     .grid-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns:  1fr;
     }
     
-    .produtc-image img {
-        max-width: 100%;
-        height: auto;
-        min-width: 100px; 
-        min-height: 100px; 
-    }
     .btn {
         font-size: 9px; 
         padding: 5px 5px; 
@@ -141,8 +134,4 @@ footer {
 }
 
 
-.grid-item {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-} 
+
