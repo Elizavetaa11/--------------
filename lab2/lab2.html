@@ -10,7 +10,7 @@
     <title>Active Link Example</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
         </nav>
     </header>
     <main>
-        <div class="container">
+        <!-- <div class="container">
             <section class="soup">
                 <h2>Выберите суп</h2>
                 <div class="grid-container">
@@ -162,7 +162,23 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> 
+            </section>
+        </div>-->
+        <div class="container">
+            <section class="soup">
+                <h2>Выберите суп</h2>
+                <div class="grid-container"></div>
+            </section>
+
+            <section class="main-course">
+                <h2>Выберите главное блюдо</h2>
+                <div class="grid-container"></div>
+            </section>
+
+            <section class="drink">
+                <h2>Выберите напиток</h2>
+                <div class="grid-container"></div>
             </section>
         </div>
         <section id="order-form">
@@ -171,8 +187,15 @@
                 <div class="order-container">
                     <div class="block">
                         <h3>Ваш заказ</h3>
-
-                        <label for="soup">Суп:</label>
+                        <div id="order-summary">
+                            <p>Ничего не выбрано</p>
+                        </div>
+                        <div id="total-cost" style="display: none;">
+                            <h4>Стоимость заказа</h4>
+                            <p id="total-cost-value"></p>
+                        </div>
+                    </div>
+                        <!-- <label for="soup">Суп:</label>
                         <select id="soup" name="soup" required>
                             <option value="">Выберите суп</option>
                             <option value="gaspacho">Гаспачо</option>
@@ -198,7 +221,7 @@
 
                         <label for="comments">Комментарии:</label>
                         <textarea id="comments" name="comments"></textarea>
-                    </div>
+                    </div> -->
 
                     <div class="block">
                         <h3>Данные клиента</h3>
@@ -244,8 +267,11 @@
             </form>
         </section>
     </main>
+
     <footer id="contacts">
         <p>Позвонить нам <a href="tel:+70000000000">+7 000 000-00-00</a></p>
     </footer>
+    <script src="dishes.js"></script>
+    <script src="displayDishes.js"></script>
 </body>
 </html>

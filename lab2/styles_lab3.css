@@ -49,10 +49,10 @@ select, input, textarea {
     padding: 10px 20px;
     border: 2px solid #000; /* Черный контур */
     border-radius: 4px;
-    background-color: #fff; /* Белый фон */
-    color: #000; /* Черный текст */
+    background-color: #fff; 
+    color: #000; 
     cursor: pointer;
-    margin-right: 10px; /* Отступ справа для расположения кнопок рядом */
+    margin-right: 10px;
 }
 
 button:hover {
@@ -61,25 +61,24 @@ button:hover {
 
 .button-container {
     display: flex;
-    gap: 10px; /* Пространство между кнопками */
+    gap: 10px; /* между кнопками */
 }
 
 
 .checkbox-container, .radio-container {
     display: flex;
-    align-items: center; /* Вертикальное выравнивание чекбокса/радиокнопки с текстом */
-    margin-bottom: 5px; /* Пространство между каждым чекбоксом/радиокнопкой */
+    align-items: center; /* Вертикальное выравнивание */
+    margin-bottom: 5px; 
 }
 
 .checkbox-container input, .radio-container input {
-    margin-right: 10px; /* Пространство между чекбоксом/радиокнопкой и меткой */
+    margin-right: 10px;
 }
 
-/* Необязательно: Пользовательские стили для чекбоксов и радиокнопок */
 .checkbox-container input[type="checkbox"],
 .radio-container input[type="radio"] {
-    width: 15px; /* Настройка размера */
-    height: 15px; /* Настройка размера */
+    width: 15px; 
+    height: 15px; 
     cursor: pointer; /* Изменение курсора при наведении */
 }
 
