@@ -11,7 +11,7 @@
     gap: 20px; /* Промежуток между блоками */
 }
 
-h2 {
+#order-form h2 {
     text-align: center;
     margin: 20px;
     grid-column: span 2;
