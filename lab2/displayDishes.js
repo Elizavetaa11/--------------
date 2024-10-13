@@ -1,146 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
-    //получение элементов разделов (ссылки на контейнеры, в которых будут отображаться блюда категорий)
-    const soupSection = document.querySelector('.soup .grid-container');
-    const mainCourseSection = document.querySelector('.main-course .grid-container');
-    const drinkSection = document.querySelector('.drink .grid-container');
-    //элементы для отображения раздела о заказе 
+     // Получаем контейнеры для каждой категории блюд
+    const sections = {
+        soup: document.querySelector('.soup .grid-container'),
+        mainCourse: document.querySelector('.main-course .grid-container'),
+        salad: document.querySelector('.salad .grid-container'),
+        drink: document.querySelector('.drink .grid-container'),
+        dessert: document.querySelector('.dessert .grid-container')
+    };
+
+    // Получаем элементы для отображения сводки заказа и общей стоимости
     const orderSummary = document.getElementById('order-summary');
     const totalCostBlock = document.getElementById('total-cost');
     const totalCostValue = document.getElementById('total-cost-value');
-    // объект храненит выбранные блюда
+
+    // Объект для хранения выбранных блюд
     const selectedDishes = {
         soup: null,
         mainCourse: null,
-        drink: null
+        salad: null,
+        drink: null,
+        dessert: null
     };
 
-    //функция для обновления сводки заказа
+    // Функция для обновления сводки заказа
     function updateOrderSummary() {
-        orderSummary.innerHTML = '';//очищаем содержимое сводки заказа
-        let totalCost = 0;//инициализируем общую стоимость
+        orderSummary.innerHTML = '';
+        let totalCost = 0;
 
-        //если ни одно блюдо не выбрано, отображается сообщение и скрывается блок общей стоимости
-        if (!selectedDishes.soup && !selectedDishes.mainCourse && !selectedDishes.drink) {
+        // Проверяем, есть ли выбранные блюда
+        if (!Object.values(selectedDishes).some(dish => dish)) {
             orderSummary.innerHTML = '<p>Ничего не выбрано</p>';
             totalCostBlock.style.display = 'none';
             return;
         }
 
-        //отображается выбранный суп или сообщение, если суп не выбран
-        if (selectedDishes.soup) {
-            const soupDiv = document.createElement('div');
-            soupDiv.innerHTML = `<h4>Суп</h4><p>${selectedDishes.soup.name} ${selectedDishes.soup.price}₽</p>`;
-            orderSummary.appendChild(soupDiv);
-            totalCost += parseInt(selectedDishes.soup.price);
-        } else {
-            const soupDiv = document.createElement('div');
-            soupDiv.innerHTML = `<h4>Суп</h4><p>Блюдо не выбрано</p>`;
-            orderSummary.appendChild(soupDiv);
-        }
+        // Обновляем сводку заказа
+        Object.entries(selectedDishes).forEach(([category, dish]) => {
+            const categoryName = {
+                soup: 'Суп',
+                mainCourse: 'Главное блюдо',
+                salad: 'Салат',
+                drink: 'Напиток',
+                dessert: 'Десерт'
+            }[category];
 
-        //отображается выбранное главное блюдо или сообщение, если блюдо не выбрано
-        if (selectedDishes.mainCourse) {
-            const mainCourseDiv = document.createElement('div');
-            mainCourseDiv.innerHTML = `<h4>Главное блюдо</h4><p>${selectedDishes.mainCourse.name} ${selectedDishes.mainCourse.price}₽</p>`;
-            orderSummary.appendChild(mainCourseDiv);
-            totalCost += parseInt(selectedDishes.mainCourse.price);
-        } else {
-            const mainCourseDiv = document.createElement('div');
-            mainCourseDiv.innerHTML = `<h4>Главное блюдо</h4><p>Блюдо не выбрано</p>`;
-            orderSummary.appendChild(mainCourseDiv);
-        }
+            const div = document.createElement('div');
+            div.classList.add('order-item'); // Добавляем класс для стилизации
+            div.innerHTML = `<h4>${categoryName}</h4><p>${dish ? `${dish.name} ${dish.price}₽` : 'Блюдо не выбрано'}</p>`;
+            orderSummary.appendChild(div);
 
-        //отображается выбранный напиток или сообщение, если напиток не выбран
-        if (selectedDishes.drink) {
-            const drinkDiv = document.createElement('div');
-            drinkDiv.innerHTML = `<h4>Напиток</h4><p>${selectedDishes.drink.name} ${selectedDishes.drink.price}₽</p>`;
-            orderSummary.appendChild(drinkDiv);
-            totalCost += parseInt(selectedDishes.drink.price);
-        } else {
-            const drinkDiv = document.createElement('div');
-            drinkDiv.innerHTML = `<h4>Напиток</h4><p>Напиток не выбран</p>`;
-            orderSummary.appendChild(drinkDiv);
-        }
+            if (dish) {
+                totalCost += parseInt(dish.price);
+            }
+        });
 
-        //обновляется и отображается общая стоимость
         totalCostValue.textContent = `${totalCost}₽`;
         totalCostBlock.style.display = 'block';
     }
 
-    //нажатие на блюдо
+    // Нажатие по блюду
     function handleDishClick(event) {
         const dishElement = event.currentTarget;
         const dataDish = dishElement.getAttribute('data-dish');
         const dish = dishes.find(d => d.dataDish === dataDish);
 
-        //выбранное блюдо в категории обновляется
-        if (dish.category === 'soup') {
-            selectedDishes.soup = dish;
-        } else if (dish.category === 'main-course') {
-            selectedDishes.mainCourse = dish;
-        } else if (dish.category === 'drink') {
-            selectedDishes.drink = dish;
-        }
-
-        //сводка заказа обновляется
+        selectedDishes[dish.category] = dish;
         updateOrderSummary();
     }
 
-    //сортировка блюд в алфавитном порядке
-    const soups = dishes.filter(dish => dish.category === 'soup').sort((a, b) => a.name.localeCompare(b.name));
-    const mainCourses = dishes.filter(dish => dish.category === 'main-course').sort((a, b) => a.name.localeCompare(b.name));
-    const drinks = dishes.filter(dish => dish.category === 'drink').sort((a, b) => a.name.localeCompare(b.name));
-
-    //добавление супов в раздел супов
-    soups.forEach(dish => {
-        //контейнер для блюда
-        const gridItem = document.createElement('div');//'div' = контейнер блюда
-        gridItem.classList.add('grid-item');//для стилизации
-        gridItem.setAttribute('data-dish', dish.dataDish);//'ata-dish' = идентификация
-        gridItem.addEventListener('click', handleDishClick);
-
-        //контейнер для изображения
-        const productImage = document.createElement('div');//'div' = изображение блюда
-        productImage.classList.add('produtc-image');//для стилизации
-        const img = document.createElement('img');
-        img.src = dish.image;
-        img.alt = dish.name;
-        productImage.appendChild(img);
-
-        //контейнер для деталей заказа
-        const productDetails = document.createElement('div');//'div' = для деталей блюда
-        productDetails.classList.add('produtc-details');//для стилизации
-        const price = document.createElement('p');
-        price.classList.add('into');
-        price.textContent = `${dish.price} ₽`;
-        const name = document.createElement('p');
-        name.classList.add('name_produtc');
-        name.textContent = dish.name;
-        const weight = document.createElement('p');
-        weight.classList.add('weight');
-        weight.textContent = dish.weight;
-        const button = document.createElement('button');
-        button.classList.add('btn');
-        button.textContent = 'Добавить';
-
-        //добавление деталей о блюде в контейнер
-        productDetails.appendChild(price);
-        productDetails.appendChild(name);
-        productDetails.appendChild(weight);
-        productDetails.appendChild(button);
-
-        //добавление деталей о блюде и изображения в контейнер
-        gridItem.appendChild(productImage);
-        gridItem.appendChild(productDetails);
-
-        //добавление контейнера блюда в раздел супов
-        soupSection.appendChild(gridItem);
-    });
-
-    mainCourses.forEach(dish => {
+    // Функция для создания элемента блюда
+    function createDishElement(dish) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
         gridItem.setAttribute('data-dish', dish.dataDish);
+        gridItem.setAttribute('data-kind', dish.kind);
         gridItem.addEventListener('click', handleDishClick);
 
         const productImage = document.createElement('div');
@@ -173,45 +106,46 @@ document.addEventListener('DOMContentLoaded', () => {
         gridItem.appendChild(productImage);
         gridItem.appendChild(productDetails);
 
-        mainCourseSection.appendChild(gridItem);
+        return gridItem;
+    }
+
+    // Категории блюд с сортировкой
+    const categories = ['soup', 'mainCourse', 'salad', 'drink', 'dessert'];
+    categories.forEach(category => {
+        const dishesInCategory = dishes.filter(dish => dish.category === category).sort((a, b) => a.name.localeCompare(b.name));
+        dishesInCategory.forEach(dish => {
+            sections[category].appendChild(createDishElement(dish));
+        });
     });
 
-    drinks.forEach(dish => {
-        const gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-        gridItem.setAttribute('data-dish', dish.dataDish);
-        gridItem.addEventListener('click', handleDishClick);
+   // Добавление обработчиков событий для фильтров
+document.querySelectorAll('.filters button').forEach(filterButton => {
+    filterButton.addEventListener('click', event => {
+        const filter = event.target.getAttribute('data-kind');
+        const categoryContainer = event.target.closest('.filters').nextElementSibling;
+        const dishesInCategory = categoryContainer.querySelectorAll('.grid-item');
 
-        const productImage = document.createElement('div');
-        productImage.classList.add('produtc-image');
-        const img = document.createElement('img');
-        img.src = dish.image;
-        img.alt = dish.name;
-        productImage.appendChild(img);
+        // Проверка, был ли фильтр уже активен
+        const isActive = event.target.classList.contains('active');
 
-        const productDetails = document.createElement('div');
-        productDetails.classList.add('produtc-details');
-        const price = document.createElement('p');
-        price.classList.add('into');
-        price.textContent = `${dish.price} ₽`;
-        const name = document.createElement('p');
-        name.classList.add('name_produtc');
-        name.textContent = dish.name;
-        const weight = document.createElement('p');
-        weight.classList.add('weight');
-        weight.textContent = dish.weight;
-        const button = document.createElement('button');
-        button.classList.add('btn');
-        button.textContent = 'Добавить';
+        // Добавление/удаление класса "active"
+        document.querySelectorAll('.filters button').forEach(button => {
+            button.classList.remove('active');
+        });
 
-        productDetails.appendChild(price);
-        productDetails.appendChild(name);
-        productDetails.appendChild(weight);
-        productDetails.appendChild(button);
+        if (!isActive) {
+            event.target.classList.add('active');
+        }
 
-        gridItem.appendChild(productImage);
-        gridItem.appendChild(productDetails);
-
-        drinkSection.appendChild(gridItem);
+        // Отображение блюд в зависимости от фильтра
+        dishesInCategory.forEach(dishElement => {
+            if (filter === 'all' || !event.target.classList.contains('active')) {
+                dishElement.style.display = 'block';
+            } else {
+                dishElement.style.display = dishElement.getAttribute('data-kind') === filter ? 'block' : 'none';
+            }
+        });
     });
+});
+
 });

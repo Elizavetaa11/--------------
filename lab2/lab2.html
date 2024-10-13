@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles_lab1.css">
     <link rel="stylesheet" href="styles_lab2.css">
     <link rel="stylesheet" href="styles_lab3.css">
+    <link rel="stylesheet" href="styles_lab5.css">
     <title>Active Link Example</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +24,7 @@
         </nav>
     </header>
     <main>
+        
         <!-- <div class="container">
             <section class="soup">
                 <h2>Выберите суп</h2>
@@ -168,19 +170,54 @@
         <div class="container">
             <section class="soup">
                 <h2>Выберите суп</h2>
+                <div class="filters">
+                    <button data-kind="fish">Рыбные</button>
+                    <button data-kind="vegetable">Вегетарианский</button>
+                    <button data-kind="meat">Мясные</button>
+                </div>
                 <div class="grid-container"></div>
             </section>
-
+        
             <section class="main-course">
                 <h2>Выберите главное блюдо</h2>
+                <div class="filters">
+                    <button data-kind="fish">Рыбные</button>
+                    <button data-kind="vegetable">Вегетарианский</button>
+                    <button data-kind="meat">Мясные</button>
+                </div>
                 <div class="grid-container"></div>
             </section>
-
+        
+            <section class="salad">
+                <h2>Выберите салат или стартер</h2>
+                <div class="filters">
+                    <button data-kind="fish">Рыбные</button>
+                    <button data-kind="vegetable">Вегетарианский</button>
+                    <button data-kind="meat">Мясные</button>
+                </div>
+                <div class="grid-container"></div>
+            </section>
+        
+            <section class="dessert">
+                <h2>Выберите десерт</h2>
+                <div class="filters">
+                    <button data-kind="small">Маленькая порция</button>
+                    <button data-kind="average">Средняя порция</button>
+                    <button data-kind="big">Большая порция</button>
+                </div>
+                <div class="grid-container"></div>
+            </section>
+        
             <section class="drink">
                 <h2>Выберите напиток</h2>
+                <div class="filters">
+                    <button data-kind="cold">Холодный</button>
+                    <button data-kind="hot">Горячий</button>
+                </div>
                 <div class="grid-container"></div>
             </section>
         </div>
+        
         <section id="order-form">
             <h2>Сделать заказ</h2>
             <form action="https://httpbin.org/post" method="POST">

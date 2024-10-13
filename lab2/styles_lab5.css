@@ -1,0 +1,42 @@
+/* Общие стили для кнопок */
+.filters button {
+    background-color: white; /* Цвет фона кнопки */
+    color: black; /* Цвет текста кнопки */
+    border: none; /* Убираем границу */
+    padding: 8px 20px; /* Внутренние отступы */
+    margin: 5px; /* Внешние отступы */
+    cursor: pointer; /* Курсор при наведении */
+    border-radius: 5px; /* Скругление углов */
+    font-size: 18px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+
+/* Стили для кнопок при наведении */
+.filters button:hover {
+    background-color: tomato; /* Цвет фона при наведении */
+    color: white;
+}
+
+/* Стили для активной кнопки */
+.filters button.active {
+    background-color: tomato; /* Цвет фона активной кнопки */
+    color: white;
+}
+
+/* Стили для контейнера фильтров */
+.filters {
+    display: flex;
+    /* justify-content: center; */
+    margin-bottom: 20px;
+}
+
+/* Стили для контейнера элемента заказа */
+.order-item h4{
+    margin-top: 0px;
+    margin-bottom: -15px;
+}
+
+
+
+
+
