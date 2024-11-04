@@ -121,27 +121,32 @@ document.addEventListener('DOMContentLoaded', () => {
    // Добавление обработчиков событий для фильтров
 document.querySelectorAll('.filters button').forEach(filterButton => {
     filterButton.addEventListener('click', event => {
+        // Получаем значение фильтра из атрибута 'data-kind' кнопки
         const filter = event.target.getAttribute('data-kind');
+         // Находим контейнер категории, который следует за контейнером фильтров
         const categoryContainer = event.target.closest('.filters').nextElementSibling;
+        // Выбираем все элементы блюд внутри контейнера категории
         const dishesInCategory = categoryContainer.querySelectorAll('.grid-item');
 
-        // Проверка, был ли фильтр уже активен
+        // проверяем, был ли фильтр уже активен
         const isActive = event.target.classList.contains('active');
 
-        // Добавление/удаление класса "active"
+        // Удаляем класс 'active' у всех кнопок фильтров
         document.querySelectorAll('.filters button').forEach(button => {
             button.classList.remove('active');
         });
-
+        // Если фильтр не был активен, добавляем класс 'active' к нажатой кнопке
         if (!isActive) {
             event.target.classList.add('active');
         }
 
         // Отображение блюд в зависимости от фильтра
         dishesInCategory.forEach(dishElement => {
-            if (filter === 'all' || !event.target.classList.contains('active')) {
+            // Если фильтр не активен, отображаем все блюда
+            if ( !event.target.classList.contains('active')) {
                 dishElement.style.display = 'block';
             } else {
+                // Иначе отображаем только блюда, соответствующие выбранному фильтру
                 dishElement.style.display = dishElement.getAttribute('data-kind') === filter ? 'block' : 'none';
             }
         });
