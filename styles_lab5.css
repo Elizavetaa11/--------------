@@ -1,0 +1,140 @@
+/* Общие стили для кнопок */
+.filters button {
+    background-color: white; /* Цвет фона кнопки */
+    color: black; /* Цвет текста кнопки */
+    border: none; /* Убираем границу */
+    padding: 8px 20px; /* Внутренние отступы */
+    margin: 5px; /* Внешние отступы */
+    cursor: pointer; /* Курсор при наведении */
+    border-radius: 5px; /* Скругление углов */
+    font-size: 18px; /* Размер шрифта */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона */
+}
+
+/* Стили для кнопок при наведении */
+.filters button:hover {
+    background-color: tomato; /* Цвет фона при наведении */
+    color: white;
+}
+
+/* Стили для активной кнопки */
+.filters button.active {
+    background-color: tomato; /* Цвет фона активной кнопки */
+    color: white;
+}
+
+/* Стили для контейнера фильтров */
+.filters {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+/* Стили для контейнера элемента заказа */
+.order-item h4{
+    margin-top: 0px;
+    margin-bottom: -15px;
+}
+
+
+
+
+
+/* styles_lab6.css */
+
+.grid-container-lunch {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.lunch-options {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.lunch-options h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* .lunch-option {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+} */
+
+.lunch-option img {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.lunch-option img:hover {
+    transform: translateY(-10px) scale(1.1);
+}
+
+.lunch-option p {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.dish-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.dish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.dish img {
+    margin-bottom: 5px;
+}
+
+.dish p:nth-of-type(2) {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+
+.notification {
+    position: fixed; /* Фиксированное положение элемента на странице */
+    top: 50%; /* Верхний край элемента находится на 50% от верха окна просмотра */
+    left: 50%; /* Левый край элемента находится на 50% от левого края окна просмотра */
+    transform: translate(-50%, -50%); /* Сдвигает элемент на 50% влево и вверх, центрируя его */
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.notification button {
+    background-color: white;
+    color: black;
+    border: 1px solid black; 
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.notification button:hover {
+    background-color: black;
+    color: white;
+}
+
+
