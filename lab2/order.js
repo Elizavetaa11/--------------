@@ -69,11 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dish) {
                 const div = document.createElement('div');
                 div.classList.add('order-item');
-                div.innerHTML = `
-                    <h4>${categoryName}</h4>
-                    <p>${dish.name} ${dish.price}₽</p>
-                    <button class="btn" data-dish="${dish.id}">Удалить</button>
-                `;
+                div.innerHTML = `<h4>${categoryName}</h4><p>${dish.name} ${dish.price}₽</p><button class="btn" data-dish="${dish.id}">Удалить</button>`;
                 orderSummary.appendChild(div);
                 totalCost += parseInt(dish.price);
             }
@@ -220,6 +216,5 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    // Вызываем функцию загрузки блюд при загрузке страницы
     loadDishes();
 });

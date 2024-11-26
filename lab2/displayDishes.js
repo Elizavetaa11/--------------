@@ -23,35 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let dishes = [];
 
     function updateOrderSummary() {
-        orderSummary.innerHTML = '';
         let totalCost = 0;
 
-        if (!Object.values(selectedDishes).some(dish => dish)) {
-            orderSummary.innerHTML = '<p>Ничего не выбрано</p>';
-            totalCostBlock.style.display = 'none';
-            return;
-        }
-
-        Object.entries(selectedDishes).forEach(([category, dish]) => {
-            const categoryName = {
-                soup: 'Суп',
-                mainCourse: 'Главное блюдо',
-                salad: 'Салат',
-                drink: 'Напиток',
-                dessert: 'Десерт'
-            }[category];
-
+        Object.values(selectedDishes).forEach(dish => {
             if (dish) {
-                const div = document.createElement('div');
-                div.classList.add('order-item');
-                div.innerHTML = `<h4>${categoryName}</h4><p>${dish.name} ${dish.price}₽</p>`;
-                orderSummary.appendChild(div);
                 totalCost += parseInt(dish.price);
             }
         });
 
         totalCostValue.textContent = `${totalCost}₽`;
-        totalCostBlock.style.display = 'block';
+        totalCostBlock.style.display = totalCost > 0 ? 'block' : 'none';
         checkoutLink.style.display = validateOrder() ? 'inline' : 'none';
     }
 
