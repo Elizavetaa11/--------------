@@ -4,11 +4,19 @@
     display: grid;
 }
 
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px; /*отступы*/
 }
+
+.grid-container p {
+    grid-column: span 3;
+    margin-top: -2%;
+}
+
+
 
 .grid-item {
     display: flex;
@@ -69,6 +77,8 @@
     align-items: center;
     border: none;
 }
+
+
 
 menu {
     display: flex;

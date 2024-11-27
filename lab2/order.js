@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalCostBlock = document.getElementById('total-cost');
     const totalCostValue = document.getElementById('total-cost-value');
     const orderForm = document.getElementById('orderForm');
+    const resetButton = document.getElementById('reset_button');
     const apiKey = '23d05351-a6d2-48ec-8e3b-fcd6081fd307'; // Замените на ваш API Key
 
     let dishes = [];
@@ -67,9 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }[category];
 
             if (dish) {
-                const div = document.createElement('div');
-                div.classList.add('order-item');
-                div.innerHTML = `<h4>${categoryName}</h4><p>${dish.name} ${dish.price}₽</p><button class="btn" data-dish="${dish.id}">Удалить</button>`;
+                const div = createDishElement(dish, true);
                 orderSummary.appendChild(div);
                 totalCost += parseInt(dish.price);
             }
@@ -100,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Функция для удаления блюда из заказа
-    function removeDishFromOrder(dishId) {
+    function removeDishFromOrderOld(dishId) {
         const dish = dishes.find(d => d.id === dishId);
         if (dish) {
             const category = dish.category === 'main-course' ? 'mainCourse' : dish.category;
@@ -110,6 +109,23 @@ document.addEventListener('DOMContentLoaded', () => {
             saveSelectedDishesToLocalStorage();
         }
     }
+
+    // Функция для удаления блюда из заказа
+    function removeDishFromOrder(dishId) {
+        const dish = dishes[dishId];
+        if (dish) {
+            const category = dish.category === 'main-course' ? 'mainCourse' : dish.category;
+            selectedDishes[category] = null;
+            updateOrderSummary();
+            updateOrderDetails();
+            saveSelectedDishesToLocalStorage();
+        }
+    }
+
+    resetButton.addEventListener('click', (event) => {
+        // Сбрасываем форму
+        orderForm.reset();
+    });
 
     // Функция для сохранения выбранных блюд в localStorage
     function saveSelectedDishesToLocalStorage() {
@@ -122,7 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Обработчик события для кнопки "Удалить"
     orderSummary.addEventListener('click', event => {
         if (event.target.classList.contains('btn')) {
+            console.log("Deleting");
             const dishId = event.target.getAttribute('data-dish');
+            console.log(dishId);
             removeDishFromOrder(dishId);
         }
     });
@@ -162,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('dessert_id', selectedDishes.dessert ? selectedDishes.dessert.id : '');
 
         try {
-            const response = await fetch(`https://edu.std-900.ist.mospolytech.ru/api/orders?api_key=${apiKey}`, {
+            const response = await fetch(`https://edu.std-900.ist.mospolytech.ru/labs/api/orders?api_key=${apiKey}`, {
                 method: 'POST',
                 body: formData
             });
@@ -214,6 +232,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         return true;
+    }
+
+    // Функция для создания элемента блюда
+    function createDishElement(dish, isOrderPage = false) {
+        const gridItem = document.createElement('div');
+        gridItem.classList.add('grid-item');
+        gridItem.setAttribute('data-dish', dish.keyword);
+        gridItem.setAttribute('data-kind', dish.kind);
+
+        const productImage = document.createElement('div');
+        productImage.classList.add('produtc-image');
+        const img = document.createElement('img');
+        img.src = dish.image;
+        img.alt = dish.name;
+        productImage.appendChild(img);
+
+        const productDetails = document.createElement('div');
+        productDetails.classList.add('produtc-details');
+        const price = document.createElement('p');
+        price.classList.add('into');
+        price.textContent = `${dish.price} ₽`;
+        const name = document.createElement('p');
+        name.classList.add('name_produtc');
+        name.textContent = dish.name;
+        const weight = document.createElement('p');
+        weight.classList.add('weight');
+        weight.textContent = dish.weight;
+        const button = document.createElement('button');
+        button.classList.add('btn');
+        button.textContent = isOrderPage ? 'Удалить' : 'Добавить';
+        button.setAttribute('data-dish', dish.id);
+
+        productDetails.appendChild(price);
+        productDetails.appendChild(name);
+        productDetails.appendChild(weight);
+        productDetails.appendChild(button);
+
+        gridItem.appendChild(productImage);
+        gridItem.appendChild(productDetails);
+
+        return gridItem;
     }
 
     loadDishes();

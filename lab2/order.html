@@ -24,18 +24,19 @@
         </nav>
     </header>
     <main>
-        <section class="order-section">
+        <section class="order-section ">
             <h2>Состав заказа</h2>
-            <div id="order-summary">
+            <div id="order-summary" class="grid-container">
                 <p>Ничего не выбрано. Чтобы добавить блюда в заказ, перейдите на страницу <a href="lab2.html">Собрать ланч</a>.</p>
             </div>
+            
         </section>
 
         <section id="order-form">
             <h2>Оформление заказа</h2>
-            <form id="orderForm" action="https://edu.std-900.ist.mospolytech.ru/api/orders" method="POST">
+            <form id="orderForm" action="https://edu.std-900.ist.mospolytech.ru/labs/api/orders" method="POST">
                 <div class="order-container">
-                    <div class="block">
+                    <div class="block ">
                         <h3>Ваш заказ</h3>
                         <div id="order-details">
                             <p>Ничего не выбрано</p>
@@ -84,7 +85,7 @@
                         <h5><i>Доступное время доставки с 7:00 до 23:00</i></h5>
 
                         <div class="button-container">
-                            <button class="btn_form" type="reset">Сбросить</button>
+                            <button id="reset_button" class="btn_form" type="reset">Сбросить</button>
                             <button class="btn_form" type="submit">Отправить</button>
                         </div>
                     </div>
