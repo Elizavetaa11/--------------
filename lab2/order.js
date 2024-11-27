@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функция для загрузки блюд с API
     async function loadDishes() {
         try {
-            const response = await fetch(`https://edu.std-900.ist.mospolytech.ru/api/dishes?api_key=${apiKey}`);
+            const response = await fetch(`https://edu.std-900.ist.mospolytech.ru/labs/api/dishes?api_key=${apiKey}`);
             if (!response.ok) {
                 throw new Error('Ошибка при загрузке блюд');
             }
