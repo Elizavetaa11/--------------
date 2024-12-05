@@ -10,14 +10,47 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 10px; /*отступы*/
 }
-
+/* лабораторная 8*/
 .grid-container p {
     grid-column: span 3;
     margin-top: -2%;
 }
+#checkout-link {
+    padding: 5px 10px;
+    background-color: #f1eee9; /* Прозрачный фон */
+    color: black; /* Цвет текста */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 5px; /* Скругление углов */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход */
+    position: absolute; /* Абсолютное позиционирование */
+    right: 10px; /* Отступ справа */
+    top: 50%; /* По вертикали на уровне стоимости */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+}
 
+#checkout-link:hover {
+    background-color: tomato; /* Цвет фона при наведении */
+    color: white; /* Цвет текста при наведении */
+}
 
+#checkout-link.inactive {
+    background-color: #c1bfbb; /* Серый фон для неактивной кнопки */
+    color: #666; /* Серый текст для неактивной кнопки */
+    pointer-events: none; /* Отключаем кликабельность */
+}
 
+#total-cost {
+    position: relative; /* Относительное позиционирование для контейнера */
+}
+.order-panel h2{
+    margin-bottom: -2%;
+    margin-top: -0.5%;
+}
+.order-panel h4{
+    margin-bottom: -1%;
+}
+/**/
 .grid-item {
     display: flex;
     flex-direction: column;

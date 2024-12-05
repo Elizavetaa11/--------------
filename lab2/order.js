@@ -82,6 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateOrderDetails() {
         orderDetails.innerHTML = '';
 
+        if (!Object.values(selectedDishes).some(dish => dish)) {
+            orderDetails.innerHTML = '<p>Ничего не выбрано</p>';
+            return;
+        }
+
         Object.entries(selectedDishes).forEach(([category, dish]) => {
             const categoryName = {
                 soup: 'Суп',
@@ -188,9 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error('Ошибка при отправке заказа');
             }
             const result = await response.json();
-            showNotification('Заказ успешно оформлен!');
-            localStorage.removeItem('selectedDishes');
-            window.location.href = 'lab2.html';
+            showNotification('Заказ успешно оформлен!', () => {
+                localStorage.removeItem('selectedDishes'); // Удаляем выбранные блюда из localStorage
+                window.location.href = 'lab2.html'; // Перенаправляем на страницу "Собрать ланч"
+            }); // Показываем уведомление об успешном оформлении заказа
         } catch (error) {
             console.error('Ошибка:', error);
             showNotification('Ошибка при отправке заказа');

@@ -33,7 +33,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         totalCostValue.textContent = `${totalCost}₽`;
         totalCostBlock.style.display = totalCost > 0 ? 'block' : 'none';
-        checkoutLink.style.display = validateOrder() ? 'inline' : 'none';
+        checkoutLink.classList.toggle('inactive', !validateOrder());
+    }
+
+    function validateOrder() {
+        const selectedDishesArray = Object.values(selectedDishes).filter(dish => dish !== null);
+
+        if (selectedDishesArray.length === 0) {
+            return false;
+        }
+
+        const hasSoup = selectedDishesArray.some(dish => dish.category === 'soup');
+        const hasMainCourse = selectedDishesArray.some(dish => dish.category === 'main-course');
+        const hasSalad = selectedDishesArray.some(dish => dish.category === 'salad');
+        const hasDrink = selectedDishesArray.some(dish => dish.category === 'drink');
+
+        if (!hasDrink) {
+            return false;
+        }
+
+        if (hasSoup && !hasMainCourse && !hasSalad) {
+            return false;
+        }
+
+        if ((hasSalad || hasMainCourse) && !hasSoup && !hasMainCourse) {
+            return false;
+        }
+
+        if (hasDrink && !hasMainCourse) {
+            return false;
+        }
+
+        return true;
     }
 
     function saveSelectedDishesToLocalStorage() {
@@ -162,37 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
-
-    function validateOrder() {
-        const selectedDishesArray = Object.values(selectedDishes).filter(dish => dish !== null);
-
-        if (selectedDishesArray.length === 0) {
-            return false;
-        }
-
-        const hasSoup = selectedDishesArray.some(dish => dish.category === 'soup');
-        const hasMainCourse = selectedDishesArray.some(dish => dish.category === 'main-course');
-        const hasSalad = selectedDishesArray.some(dish => dish.category === 'salad');
-        const hasDrink = selectedDishesArray.some(dish => dish.category === 'drink');
-
-        if (!hasDrink) {
-            return false;
-        }
-
-        if (hasSoup && !hasMainCourse && !hasSalad) {
-            return false;
-        }
-
-        if ((hasSalad || hasMainCourse) && !hasSoup && !hasMainCourse) {
-            return false;
-        }
-
-        if (hasDrink && !hasMainCourse) {
-            return false;
-        }
-
-        return true;
-    }
 
     function showNotification(message) {
         const notification = document.createElement('div');
